@@ -105,123 +105,300 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+Create a table named ProjectAssignments with the following constraints:
+AssignmentID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+ProjectID as INTEGER should be a foreign key referencing Projects(ProjectID).
+AssignmentDate as DATE should be NOT NULL.
+For example:
+
+Test	Result
+INSERT INTO ProjectAssignments (AssignmentID, EmployeeID, ProjectID, AssignmentDate) VALUES (2, 99, 1, '2024-01-03');
+Error: FOREIGN KEY constraint failed
+
 
 ```sql
--- Paste your SQL code below for Question 1
+create table ProjectAssignments(
+AssignmentID integer primary key,
+EmployeeID integer,
+ProjectID integer,
+AssignmentDate date not null,
+foreign key (EmployeeID) references Employees(EmployeeID)
+foreign key (ProjectID) references projects(ProjectID)
+);
 ```
 
 **Output:**
+<img width="1463" height="718" alt="Screenshot 2025-10-06 133706" src="https://github.com/user-attachments/assets/d512d809-49fa-4ffd-b284-db5dfdc8cbe2" />
 
-![Output1](output.png)
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Create a table named Products with the following columns:
+
+ProductID as INTEGER
+ProductName as TEXT
+Price as REAL
+Stock as INTEGER
+For example:
+
+Test	Result
+pragma table_info('Products');
+cid   name        type        notnull     dflt_value  pk
+----  ----------  ----------  ----------  ----------  ----------
+0     ProductID   INTEGER     0                       0
+1     ProductNam  TEXT        0                       0
+2     Price       REAL        0                       0
+3     Stock       INTEGER     0                       0
+
 
 ```sql
--- Paste your SQL code below for Question 2
+CREATE TABLE Products(
+ProductID INTEGER,
+ProductName TEXT,
+Price REAL,
+Stock INTEGER
+);
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1468" height="800" alt="Screenshot 2025-10-06 133723" src="https://github.com/user-attachments/assets/1facdeea-d9db-45d3-ac6e-a6b6e85207ce" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+Insert all customers from Old_customers into Customers
+
+Table attributes are CustomerID, Name, Address, Email
+
+For example:
+
+Test	Result
+select * from Customers;
+CustomerID  Name             Address         Email
+----------  ---------------  --------------  ---------------------
+301         Michael Johnson  123 Elm Street  michael.j@example.com
+302         Sarah Lee        456 Oak Avenue  sarah.lee@example.com
+303         David Wilson     789 Pine Road   david.w@example.com
+
 
 ```sql
--- Paste your SQL code below for Question 3
+insert into customers(CustomerID, Name, Address, Email)
+select CustomerID, Name, Address, Email
+from Old_customers
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1451" height="736" alt="Screenshot 2025-10-06 133741" src="https://github.com/user-attachments/assets/9ea496c8-0294-47d7-b7cd-a01b8ca98dde" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+Write an SQL query to add a new column email of type TEXT to the Student_details table, and ensure that this column cannot contain NULL values and make default value as 'Invalid'
+
+ 
+
+ 
+
+For example:
+
+Test	Result
+INSERT INTO Student_details (RollNo, Name, Gender, Subject, email) 
+VALUES (1, 'John Doe', 'M', 'Math', 'john@example.com');
+select * from Student_details;
+RollN  Name   Gen  Subject     email
+-----  -----  ---  ----------  ----------------
+1      John   M    Math        john@example.com
+
 
 ```sql
--- Paste your SQL code below for Question 4
+alter table Student_details add column email TEXT not null default 'Invalid';
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1156" height="693" alt="Screenshot 2025-10-06 133825" src="https://github.com/user-attachments/assets/7bca06fd-51a6-47c1-a6d2-a068164e3804" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+Create a table named Bonuses with the following constraints:
+BonusID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+BonusAmount as REAL should be greater than 0.
+BonusDate as DATE.
+Reason as TEXT should not be NULL.
+For example:
+
+Test	Result
+INSERT INTO Bonuses (BonusID, EmployeeID, BonusAmount, BonusDate, Reason) VALUES (1, 6, 1000.0, '2024-08-01', 'Outstanding performance');
+SELECT * FROM Bonuses;
+BonusID     EmployeeID  BonusAmount  BonusDate   Reason
+----------  ----------  -----------  ----------  -----------------------
+1           6           1000.0       2024-08-01  Outstanding performance
+
 
 ```sql
--- Paste your SQL code below for Question 5
+create table Bonuses(
+BonusID integer primary key,
+EmployeeID integer,
+BonusAmount real check(BonusAmount>0),
+BonusDate date,
+Reason text not null,
+foreign key (EmployeeId) references Employees(EmployeeId)
+);
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1460" height="794" alt="Screenshot 2025-10-06 133842" src="https://github.com/user-attachments/assets/b691a064-6649-41f4-9c20-90dc8363f9a8" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+Write a SQL query for adding a new column named "email" with the datatype VARCHAR(100) to the  table "customer" 
+
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
 
 ```sql
--- Paste your SQL code below for Question 6
+alter table  customer add column email VARCHAR(100)
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1441" height="872" alt="Screenshot 2025-10-06 133901" src="https://github.com/user-attachments/assets/a57f9718-08b1-46c1-b124-723de9552676" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should set NULL on updates and deletes.
+item_desc and rate should not accept NULL.
+For example:
+
+Test	Result
+INSERT INTO item VALUES("ITM5","Charlie Gold",700,"COM4");
+UPDATE company SET com_id='COM5' WHERE com_id='COM4';
+SELECT * FROM item;
+item_id     item_desc     rate        icom_id
+----------  ------------  ----------  ----------
+ITM5        Charlie Gold  700
+
 
 ```sql
--- Paste your SQL code below for Question 7
+CREATE TABLE item (
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT(4),
+    FOREIGN KEY (icom_id) REFERENCES company(com_id)
+    ON UPDATE SET NULL
+    ON DELETE SET NULL
+);
 ```
 
 **Output:**
+<img width="1369" height="837" alt="Screenshot 2025-10-06 133918" src="https://github.com/user-attachments/assets/dbc1f2a5-d6e2-425d-927d-b6036d662cca" />
 
-![Output7](output.png)
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Insert a new product with ProductID 101, Name Laptop, Category Electronics, Price 1500, and Stock 50 into the Products table.
+
+For example:
+
+Test	Result
+SELECT * FROM Products WHERE ProductID = 101;
+ProductID   Name        Category     Price       Stock
+----------  ----------  -----------  ----------  ----------
+101         Laptop      Electronics  1500        50
+
 
 ```sql
--- Paste your SQL code below for Question 8
+insert into Products (ProductId,Name,Category,Price,Stock)
+values(101,"Laptop","Electronics",1500,50);
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1263" height="649" alt="Screenshot 2025-10-06 133934" src="https://github.com/user-attachments/assets/1cb5d5f7-63f0-4e7b-952b-6037f4cc06e6" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Insert the following customers into the Customers table:
+
+CustomerID  Name         Address     City        ZipCode
+----------  -----------  ----------  ----------  ----------
+302         Laura Croft  456 Elm St  Seattle     98101
+303         Bruce Wayne  789 Oak St  Gotham      10001
+For example:
+
+Test	Result
+SELECT * FROM Customers;
+
+CustomerID  Name         Address     City        ZipCode
+----------  -----------  ----------  ----------  ----------
+302         Laura Croft  456 Elm St  Seattle     98101
+303         Bruce Wayne  789 Oak St  Gotham      10001
+
 
 ```sql
--- Paste your SQL code below for Question 9
+insert into Customers(CustomerId,Name,Address,City,Zipcode)
+values(302,"Laura Croft","456 Elm St","Seattle",98101),(303,"Bruce Wayne","789 Oak St","Gotham",10001)
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1298" height="796" alt="Screenshot 2025-10-06 133951" src="https://github.com/user-attachments/assets/29cf93aa-8b5d-42c4-af10-310614b35b0a" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+Create a table named Attendance with the following constraints:
+AttendanceID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+AttendanceDate as DATE.
+Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
+For example:
+
+Test	Result
+INSERT INTO Attendance (AttendanceID, EmployeeID, AttendanceDate, Status) VALUES (1, 1, '2024-08-01', 'Present');
+SELECT * FROM Attendance;
+AttendanceID  EmployeeID  AttendanceDate  Status
+------------  ----------  --------------  ----------
+1             1           2024-08-01      Present
+
 
 ```sql
--- Paste your SQL code below for Question 10
+CREATE TABLE Attendance (
+    AttendanceID INTEGER PRIMARY KEY,
+    EmployeeID INTEGER,
+    AttendanceDate DATE,
+    Status TEXT CHECK (Status IN ('Present', 'Absent', 'Leave')),
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+);
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1367" height="752" alt="Screenshot 2025-10-06 134006" src="https://github.com/user-attachments/assets/c8dcd663-c091-4eb7-b4b0-463793955eff" />
+
 
 
 ## RESULT
